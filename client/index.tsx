@@ -190,9 +190,9 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
 
   return ({ pkg }) => {
     return Layout(
-      <div class="py-2">
+      <div class="pt-2 pb-8">
         <div class="max-w-4xl mx-auto">
-          <div class="pb-2 px-2 border-b border-[#c7cbbe] dark:border-[#192024]">
+          <div class="pb-2 px-2">
             <a
               href={`https://www.npmjs.com/package/${pkg.name}/v/${pkg.version}`}
               class="hover:underline"
@@ -200,7 +200,7 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
               {pkg.name}
             </a>
           </div>
-          <div class="pb-2 px-2 border-b border-[#c7cbbe] dark:border-[#192024]">└─ {pkg.file.replace(/^\//, '')}</div>
+          <div class="pb-2 px-2 border-b border-transparent dark:border-[#192024]">└─ {pkg.file.replace(/^\//, '')}</div>
 
           {lineCount > 0 &&
             <div oncreate={() => {
@@ -219,8 +219,8 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
             }}></div>
           }
 
-          <div class="CodeBox relative flex">
-            <div onclick={onLineNumClick} class="pt-2 px-2 border-r border-[#c7cbbe] dark:border-[#192024] text-right text-[#a0a691] dark:text-[#394146]">
+          <div class="CodeBox relative flex bg-white dark:bg-transparent rounded-sm shadow">
+            <div onclick={onLineNumClick} class="py-2 pr-2 pl-3 border-r border-[#f7f6f2] dark:border-[#192024] text-right text-[#d7d8da] dark:text-[#394146]">
               {lineCount > 0 && new Array(lineCount).fill(0).map((_, i) => {
                 const shouldHighlight = !!highlightLineStart && !!(
                   !highlightLineEnd && i+1 === highlightLineStart ||
@@ -234,8 +234,8 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
                 )
               })}
             </div>
-            <div class="pt-2 px-2 flex-1 overflow-x-auto dark:bg-[#13181b]">
-              <pre>
+            <div class="pt-2 flex-1 overflow-x-auto dark:bg-[#13181b]">
+              <pre class="px-2">
                 <code
                   oncreate={({ dom }) => setCodeElem(dom as HTMLElement)}
                   class={`Code language-${lang || 'text'}`}
@@ -275,7 +275,7 @@ function Home() {
   return Layout(
     <div class="pt-32 px-4 flex-center">
       <div class="text-3xl sm:text-4xl text-center leading-snug">
-        <span class="text-[#5177b8]">pkg.link</span> lets you <span class="text-[#5177b8]">permalink</span>
+        <span class="text-[#55b9ac]">pkg.link</span> lets you <span class="text-[#D97F3A]">permalink</span>
         <br />to package source code
       </div>
       <div class="mt-6 text-base sm:text-xl text-center">That's it. That's the app.</div>

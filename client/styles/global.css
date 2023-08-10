@@ -17,6 +17,7 @@ body {
   display: block;
 }
 .CodeBox .line:hover {
+  color: black;
   @apply dark:text-[#b0b9bf]
 }
 .CodeBox .highlight {
@@ -25,7 +26,7 @@ body {
 .CodeBox .highlight::before {
   content: "1";
   position: absolute;
-  background: hsla(210.78, 81.8%, 53.3%, 0.31);
+  background: hsla(45, 92%, 70%, 0.3);
   left: 0;
   right: 0;
   color: transparent;
