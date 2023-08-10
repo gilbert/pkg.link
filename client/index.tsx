@@ -173,6 +173,11 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
       // hashchange doesn't emit when we do that, so update manually
       updateLineHighlights()
     }
+    else if (!e.shiftKey && +target.innerText === highlightLineStart && !highlightLineEnd) {
+      // Unselect
+      highlightLineStart = 0
+      window.history.pushState(null, '', `${window.location.pathname}${window.location.search}`)
+    }
     else if (!e.shiftKey) {
       const newHash = `#L${target.innerText}`
       window.history.pushState(null, '', `${window.location.pathname}${window.location.search}${newHash}`)
