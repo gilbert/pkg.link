@@ -98,7 +98,7 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
   })
 
   function updateLineHighlights() {
-    let [, start, end] = window.location.hash.match(/^#L(\d+)(?:-(\d+))?$/) || []
+    let [, start, end] = window.location.hash.match(/^#L(\d+)(?:-L?(\d+))?$/) || []
     highlightLineStart = start ? parseInt(start, 10) : 0
     highlightLineEnd = end ? parseInt(end, 10) : 0
   }
