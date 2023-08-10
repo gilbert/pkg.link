@@ -188,6 +188,7 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
       <div class="py-2">
         <div class="max-w-4xl mx-auto">
           <div class="pb-2 px-2 border-b border-[#c7cbbe] dark:border-[#192024]">{pkg.name}</div>
+          <div class="pb-2 px-2 border-b border-[#c7cbbe] dark:border-[#192024]">└─ {pkg.file.replace(/^\//, '')}</div>
 
           {lineCount > 0 &&
             <div oncreate={() => {
