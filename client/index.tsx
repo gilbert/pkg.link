@@ -187,7 +187,14 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
     return Layout(
       <div class="py-2">
         <div class="max-w-4xl mx-auto">
-          <div class="pb-2 px-2 border-b border-[#c7cbbe] dark:border-[#192024]">{pkg.name}</div>
+          <div class="pb-2 px-2 border-b border-[#c7cbbe] dark:border-[#192024]">
+            <a
+              href={`https://www.npmjs.com/package/${pkg.name}/v/${pkg.version}`}
+              class="hover:underline"
+            >
+              {pkg.name}
+            </a>
+          </div>
           <div class="pb-2 px-2 border-b border-[#c7cbbe] dark:border-[#192024]">└─ {pkg.file.replace(/^\//, '')}</div>
 
           {lineCount > 0 &&
