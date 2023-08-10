@@ -1,0 +1,24 @@
+{
+  "name": "pkg.link",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "lancer production",
+    "build": "lancer build",
+    "init": "lancer init",
+    "dev": "lancer dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@lancer/studio": "^0.23.0",
+    "@types/mithril": "^2.0.13",
+    "@types/prismjs": "^1.26.0",
+    "mithril": "^2.2.2",
+    "mithril-cc": "^0.11.2",
+    "tailwindcss": "^3.3.3"
+  }
+}

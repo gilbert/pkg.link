@@ -1,0 +1,15 @@
+<page title="HOME">
+
+<div id="app"></div>
+
+<script src="/index.tsx"></script>
+
+<link rel="stylesheet" href="/styles/prism-base.css">
+<script data-manual src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+<script>
+  Prism.hooks.add("before-highlight", function (env) {
+    env.code = env.element.innerText
+  })
+  window.resolvePrism(Prism)
+</script>

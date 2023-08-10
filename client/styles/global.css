@@ -1,0 +1,38 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+body {
+  @apply dark:text-[#d3d6cc];
+  @apply bg-[#d3d6cc] dark:bg-[#13181b];
+  font-size: 12px;
+  @apply font-mono;
+}
+
+.flex-center {
+  @apply flex flex-col items-center justify-center;
+}
+
+.CodeBox .line {
+  cursor: pointer;
+  display: block;
+}
+.CodeBox .line:hover {
+  @apply dark:text-[#b0b9bf]
+}
+.CodeBox .highlight {
+/*  display: relative;*/
+}
+.CodeBox .highlight::before {
+  content: "1";
+  position: absolute;
+  background: hsla(210.78, 81.8%, 53.3%, 0.31);
+  left: 0;
+  right: 0;
+  color: transparent;
+  pointer-events: none;
+  @apply dark:bg-[hsla(47,56%,14%,0.61)];
+}
+.CodeBox .highlight .line {
+  @apply dark:text-[#b0b9bf]
+}
