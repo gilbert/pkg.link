@@ -4,7 +4,6 @@
 
 body {
   @apply dark:text-[#d3d6cc];
-  @apply bg-[#d3d6cc] dark:bg-[#13181b];
   font-size: 12px;
   @apply font-mono;
 }
