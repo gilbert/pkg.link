@@ -82,8 +82,12 @@ type FileComponentAttrs = {
 const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
   // Convoluted but avoids 3rd party libraries
   let setCode: (code: string) => void
-  let code = new Promise<string>(resolve => {
-    setCode = resolve
+  let code = ''
+  let codePromise = new Promise<string>(resolve => {
+    setCode = (result: string) => {
+      resolve(result)
+      code = result
+    }
   })
   let lang = $attrs().pkg.file.match(/\.([a-z]+)$/)?.[1] || 'txt'
 
@@ -98,14 +102,41 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
   })
 
   function updateLineHighlights() {
-    let [, start, end] = window.location.hash.match(/^#L(\d+)(?:-L?(\d+))?$/) || []
-    highlightLineStart = start ? parseInt(start, 10) : 0
-    highlightLineEnd = end ? parseInt(end, 10) : 0
+    const hash = window.location.hash
+    if (hash.startsWith('#L')) {
+      // Line numbers
+      let [, start, end] = window.location.hash.match(/^#L(\d+)(?:-L?(\d+))?$/) || []
+      highlightLineStart = start ? parseInt(start, 10) : 0
+      highlightLineEnd = end ? parseInt(end, 10) : 0
+    }
+    else if (hash.startsWith('#C') && code) {
+      // Character numbers
+      let [, start, end] = window.location.hash.match(/^#C(\d+)(?:-C?(\d+))?$/)?.map(s => +s) || []
+
+      if (!start) return
+      if (!end) end = start
+
+      let index = 0
+      let lineStart = 0
+      for (; index < code.length && index < start; index++) {
+        if (code[index] === '\n') {
+          lineStart++
+        }
+      }
+      let lineEnd = lineStart
+      for (; index < code.length && index < end; index++) {
+        if (code[index] === '\n') {
+          lineEnd++
+        }
+      }
+      highlightLineStart = lineStart + 1
+      highlightLineEnd = lineEnd + 1
+    }
   }
 
 
   async function setCodeElem(codeElem: HTMLElement) {
-    codeElem.innerText = await code
+    codeElem.innerText = await codePromise
   }
 
 
@@ -117,6 +148,7 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
     const codeRaw = await (await fetch(pkgToCdnUrl('jsdelivr', pkg))).text()
     setCode(codeRaw)
     lineCount = codeRaw.split('\n').length
+    updateLineHighlights()
     m.redraw()
 
     // Highlight after
