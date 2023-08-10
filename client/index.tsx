@@ -94,7 +94,6 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
   updateLineHighlights()
 
   this.addEventListener(window, 'hashchange', () => {
-    console.log('hashchange', window.location.hash)
     updateLineHighlights()
   })
 
@@ -128,15 +127,13 @@ const FileComponent = cc<FileComponentAttrs>(function ($attrs) {
 
   function onLineNumClick(e: MouseEvent) {
     const target = e.target as HTMLElement
-    let [, start] = window.location.hash.match(/^#L(\d+)(?:-(\d+))?$/) || []
-    console.log("eh", start, target)
 
     if (!target.classList.contains('line')) return
 
     e.preventDefault()
 
-    if (e.shiftKey && start) {
-      let [startNum, endNum] = [+start, +target.innerText].sort((a,b) => a - b)
+    if (e.shiftKey && highlightLineStart) {
+      let [startNum, endNum] = [highlightLineStart, +target.innerText].sort((a,b) => a - b)
       const newHash = `#L${startNum}-${endNum}`
       // Push new window state with new hash, keeping pathname and url parameters intact
       window.history.pushState(null, '', `${window.location.pathname}${window.location.search}${newHash}`)
